@@ -1,18 +1,11 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
+# Exclude packages copied from other sources
+external/
 
-# Other files and folders
-.settings/
+# Exclude db data files
+db/pgdata/
 
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Exclude build process temp files
+.gradle
+/gradle/
+/build/
+/bin/

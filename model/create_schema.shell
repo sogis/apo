@@ -1,0 +1,6 @@
+#!/bin/bash
+
+java -jar $(pwd)/../external/ili2pg-4.3.2/ili2pg-4.3.2.jar --schemaimport --dbdatabase postgres --dbschema ada_denkmalschutz --dbusr postgres --dbpwd postgres \
+	--smart2Inheritance --defaultSrsAuth EPSG --defaultSrsCode 2056 --strokeArcs --createGeomIdx --createFk --createFkIdx --createEnumTabs --beautifyEnumDispName \
+	--createMetaInfo --createUnique --createNumChecks --nameByTopic --coalesceMultiSurface --coalesceMultiPoint \
+	--modeldir "$(pwd);http://models.interlis.ch/" --models SO_ADA_Denkmal_20191128
