@@ -1,0 +1,74 @@
+INTERLIS 2.3;
+
+/** !! Seitenwagenmodell fuer die Fachapplikation
+ * !! ArtPlus.
+ * !! Auf die Verwendung von UUIDOID wurde aufgrund des
+ * !! Anwendungsfalles bewusst verzichtet.
+ * !! In den Attributen mit Suffix _Code sind die in der Fachapplikation
+ * !! vergebenen Codes enthalten.
+ * !!------------------------------------------------------------------------------
+ * !! Version    | wer | Aenderung
+ * !!------------------------------------------------------------------------------
+ * !! 2019-11-29 | OJ  | Initial erstellt.
+ */
+!!@ technicalContact=mailto:agi@so.ch
+MODEL SO_ADA_Denkmal_Migrate_20191128 (de)
+AT "http://geo.so.ch/models/ADA/"
+VERSION "2019-11-28"  =
+  IMPORTS GeometryCHLV95_V1, SO_ADA_Denkmal_20191128;
+  
+  TOPIC Fachapplikation EXTENDS SO_ADA_Denkmal_20191128.Fachapplikation =
+  
+    CLASS Denkmal (EXTENDED) =
+        
+        /** Enthaelt die für die Migration notwendige 
+         *  ArtPlus uuid 
+         */
+        Denkmal_UUID : MANDATORY TEXT*40;
+        
+    END Denkmal;
+  
+  END Fachapplikation;
+  
+  TOPIC ID_Migrate =
+  
+    /** Enthaelt die für die Migration notwendige 
+     *  Mapping-Tabelle zwischen ArtPlus uuid und id 
+     */
+    CLASS ID_Map =
+    
+      Denkmal_ID : MANDATORY 1..2147483647;
+      
+      Denkmal_UUID : MANDATORY TEXT*40;
+      
+    END ID_Map;
+    
+  END ID_Migrate;
+  
+  TOPIC GIS EXTENDS SO_ADA_Denkmal_20191128.GIS =
+  
+    CLASS Geometrie (EXTENDED) =
+    
+      /** Enthaelt die für die Migration notwendige 
+       *  ArtPlus uuid 
+       */
+      Denkmal_UUID : MANDATORY TEXT*40;
+	  
+    END Geometrie;
+  
+  END GIS;
+  
+  TOPIC GIS_Single EXTENDS SO_ADA_Denkmal_20191128.GIS_Single =
+  
+    CLASS Geometrie (EXTENDED) =
+    
+      /** Enthaelt die für die Migration notwendige 
+       *  ArtPlus uuid 
+       */
+      Denkmal_UUID : MANDATORY TEXT*40;
+	  
+    END Geometrie;
+    
+  END GIS_Single;
+
+END SO_ADA_Denkmal_Migrate_20191128.

@@ -3,35 +3,39 @@ import ch.so.agi.gretl.api.TransferSet
 
 apply plugin: 'ch.so.agi.gretl'
 
-defaultTasks 'printSequenceUpdate'
+defaultTasks 'transferOldData'
 
 def localDevDb = ['jdbc:postgresql://localhost/postgres','postgres','postgres']
+def sogisDb = [dbUriSogis, dbUserSogis, dbPwdSogis]
 def editDb = [dbUriEdit, dbUserEdit, dbPwdEdit]
 
+
+/*
+Schritte:
+1. Altdaten übertragen. Für ID Dummy einsetzen
+2. Mapping-Tabelle übertragen
+3. ID korrekt setzen
+4. UUID's ausgeben, für welche kein Denkmal existiert
+5. Neudaten in Edit-DB übertragen
+*/
+
+/*
 task deleteRows(type: SqlExecutor){
     database = editDb
     sqlFiles = ['delete_all_datarows.sql']
 }
+*/
 
-task transferAfuGewaesserschutz(type: Db2Db, dependsOn: deleteRows){
-    sourceDb = localDevDb
+task transferOldData(type: Db2Db){
+    sourceDb = sogisDb
     targetDb = editDb
     transferSets = [
-            new TransferSet('status.sql', 'afu_gewaesserschutz.gwszonen_status', false), 
-            new TransferSet('gwsareal.sql', 'afu_gewaesserschutz.gwszonen_gwsareal', false),
-            new TransferSet('gwszone.sql', 'afu_gewaesserschutz.gwszonen_gwszone', false),            
-            new TransferSet('dokument.sql', 'afu_gewaesserschutz.gwszonen_dokument', false),
-            new TransferSet('gsbereich.sql', 'afu_gewaesserschutz.gsbereiche_gsbereich', false),
-            new TransferSet('rechtsvorschriftgwsareal.sql', 'afu_gewaesserschutz.gwszonen_rechtsvorschriftgwsareal', false),
-            new TransferSet('rechtsvorschriftgwszone.sql', 'afu_gewaesserschutz.gwszonen_rechtsvorschriftgwszone', false)
+            new TransferSet('denkmal.sql', 'ada_denkmalschutz.so_d_dn0191128fachapplikation_denkmal', true),
+            new TransferSet('singlepoint.sql', 'ada_denkmalschutz.so_d_dn0191128gis_single_geometrie', true),
+            new TransferSet('singlepoly.sql', 'ada_denkmalschutz.so_d_dn0191128gis_single_geometrie', false),
+            new TransferSet('multipoint.sql', 'ada_denkmalschutz.so_d_dn0191128gis_geometrie', true),
+            new TransferSet('multipolygon.sql', 'ada_denkmalschutz.so_d_dn0191128gis_geometrie', false),
+            new TransferSet('idmap.sql', 'ada_denkmalschutz.id_migrate_id_map', true)
     ]
 }
-
-task printSequenceUpdate(type: SqlExecutor, dependsOn: transferAfuGewaesserschutz){
-    database = editDb
-    sqlFiles = ['print_sequence_update.sql']
-}
-
-
-
 
