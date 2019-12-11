@@ -17,6 +17,8 @@ Schritte:
 3. ID korrekt setzen
 4. UUID's ausgeben, für welche kein Denkmal existiert
 5. Neudaten in Edit-DB übertragen
+
+1 und 2 sind erledigt...
 */
 
 /*
@@ -33,8 +35,6 @@ task transferOldData(type: Db2Db){
             new TransferSet('denkmal.sql', 'ada_denkmalschutz.so_d_dn0191128fachapplikation_denkmal', true),
             new TransferSet('singlepoint.sql', 'ada_denkmalschutz.so_d_dn0191128gis_single_geometrie', true),
             new TransferSet('singlepoly.sql', 'ada_denkmalschutz.so_d_dn0191128gis_single_geometrie', false),
-            new TransferSet('multipoint.sql', 'ada_denkmalschutz.so_d_dn0191128gis_geometrie', true),
-            new TransferSet('multipolygon.sql', 'ada_denkmalschutz.so_d_dn0191128gis_geometrie', false),
             new TransferSet('idmap.sql', 'ada_denkmalschutz.id_migrate_id_map', true)
     ]
 }

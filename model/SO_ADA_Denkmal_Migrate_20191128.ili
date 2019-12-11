@@ -1,11 +1,8 @@
 INTERLIS 2.3;
 
-/** !! Seitenwagenmodell fuer die Fachapplikation
- * !! ArtPlus.
- * !! Auf die Verwendung von UUIDOID wurde aufgrund des
- * !! Anwendungsfalles bewusst verzichtet.
- * !! In den Attributen mit Suffix _Code sind die in der Fachapplikation
- * !! vergebenen Codes enthalten.
+/** !! Modell, welches die entsprechenden Tabellen zwecks Datenmigration um die 
+ * !! "uuid" des ArtPlus-Denkmals erweitert. UUID kann von Altdaten beliebige
+ * !! Strings enthalten.
  * !!------------------------------------------------------------------------------
  * !! Version    | wer | Aenderung
  * !!------------------------------------------------------------------------------
@@ -57,18 +54,5 @@ VERSION "2019-11-28"  =
     END Geometrie;
   
   END GIS;
-  
-  TOPIC GIS_Single EXTENDS SO_ADA_Denkmal_20191128.GIS_Single =
-  
-    CLASS Geometrie (EXTENDED) =
-    
-      /** Enthaelt die für die Migration notwendige 
-       *  ArtPlus uuid 
-       */
-      Denkmal_UUID : MANDATORY TEXT*40;
-	  
-    END Geometrie;
-    
-  END GIS_Single;
 
 END SO_ADA_Denkmal_Migrate_20191128.
