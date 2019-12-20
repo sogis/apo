@@ -1,0 +1,22 @@
+
+export DB_URI_SOGIS=$GRETL_PROD_SOGIS_URL
+export DB_USER_SOGIS=$GRETL_DB_USER
+export DB_PWD_SOGIS=$GRETL_DB_PASS
+
+export DB_URI_EDIT=$GRETL_INT_EDIT_URL
+export DB_USER_EDIT=$GRETL_DB_USER
+export DB_PWD_EDIT=$GRETL_DB_PASS
+
+echo "===================================================================="
+echo "DB_URI_SOGIS: $DB_URI_SOGIS"
+echo "DB_USER_SOGIS: $DB_USER_SOGIS"
+echo "DB_PWD_SOGIS: $DB_PWD_SOGIS"
+echo ""
+echo "DB_URI_EDIT: $DB_URI_EDIT"
+echo "DB_USER_EDIT: $DB_USER_EDIT"
+echo "DB_PWD_EDIT: $DB_PWD_EDIT"
+echo "===================================================================="
+
+
+/bin/bash ~/Dokumente/git/apo/datamig/start-gretl.shell --docker-image sogis/gretl-runtime:production --job-directory ~/Dokumente/git/apo/datamig/testdata/
+

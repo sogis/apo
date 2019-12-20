@@ -1,0 +1,20 @@
+import ch.so.agi.gretl.tasks.*
+import ch.so.agi.gretl.api.TransferSet
+
+apply plugin: 'ch.so.agi.gretl'
+
+defaultTasks 'transferTestData'
+
+def sogisDb = [dbUriSogis, dbUserSogis, dbPwdSogis]
+def editDb = [dbUriEdit, dbUserEdit, dbPwdEdit]
+
+
+task transferTestData(type: Db2Db){
+    sourceDb = sogisDb
+    targetDb = editDb
+    transferSets = [
+            new TransferSet('denkmal.sql', 'ada_denkmalschutz.fachapplikation_denkmal', true),
+            new TransferSet('rechtsvorschrift_link.sql', 'ada_denkmalschutz.fachapplikation_rechtsvorschrift_link', true)
+    ]
+}
+

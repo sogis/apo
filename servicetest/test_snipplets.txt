@@ -1,0 +1,64 @@
+
+Ablauf für das Testen
+---------------------
+1. Mit AGDI auf "public" lesen und schreiben via dataservice testen - pfad ../api/..
+2. Mit AGDI auf entsprechender Rolle via dataservice lesen - pfad ../api-auth/..
+
+ch.so.ada.denkmalschutz.edit.denkmal.data
+-----------------------------------------
+1.1 "public" lesen
+curl -X GET "https://geo-i.so.ch/api/data/v1/ch.so.ada.denkmalschutz.edit.denkmal.data/" -H  "accept: application/json"
+
+1.2 "public" public schreiben (mittels Swagger)
+{
+	"type": "Feature",
+	"properties": {
+		"id": 999,
+		"objektname": "testobjekt",
+		"gemeindename": "testgemeinde",
+		"gemeindeteil": "teil",
+		"adr_strasse": null,
+		"adr_hausnummer": null,
+		"objektart_code": null,
+		"objektart_text": null,
+		"schutzstufe_code": "code_code",
+		"schutzstufe_text": "code_text",
+		"schutzdurchgemeinde": false
+	},
+	"geometry": {
+		"type": "Point",
+		"coordinates": [2606148.89839024, 1228770.35717596]
+	},
+	"crs": {
+		"type": "name",
+		"properties": {
+			"name": "urn:ogc:def:crs:EPSG::2056"
+		}
+	}
+}
+
+
+1.3 Geschützt lesen
+curl -X GET "https://geo-i.so.ch/api-auth/data/v1/ch.so.ada.denkmalschutz.edit.denkmal.data/" -u srvartsog:Lfns-AiQPnZ_3dlIcWIy -H  "accept: application/json"
+
+
+
+ch.so.ada.denkmalschutz.edit.rechtsvorschrift_link.data
+-------------------------------------------------------
+1.1 "public" lesen
+curl -X GET "https://geo-i.so.ch/api/data/v1/ch.so.ada.denkmalschutz.edit.rechtsvorschrift_link.data/" -H  "accept: application/json"
+
+
+1.3 Geschützt lesen
+curl -X GET "https://geo-i.so.ch/api-auth/data/v1/ch.so.ada.denkmalschutz.edit.rechtsvorschrift_link.data/" -u srvartsog:Lfns-AiQPnZ_3dlIcWIy -H  "accept: application/json"
+
+"id": 41,
+"geometry": {
+	"type": null,
+	"coordinates": null
+}
+
+Karte öffnen
+------------
+https://geo-i.so.ch/map/?t=denkmal
+
